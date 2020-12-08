@@ -1,6 +1,5 @@
 import psycopg2
 import psycopg2.extras
-import random
 from flask import Flask, render_template, flash, redirect, url_for, session, logging, request
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators  # WTF-from for registration
 from passlib.hash import sha256_crypt
@@ -24,7 +23,7 @@ def about():
 @app.route('/random')
 def random():
     # Create cursor
-    conn = psycopg2.connect(dbname="myflaskapp", user="postgres", password="qwert111")
+    conn = psycopg2.connect(dbname="dreamsaver", user="postgres", password="qwert111")
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)  # DictCursor is 'a must'!
 
     # Get articles
@@ -36,23 +35,27 @@ def random():
     #print(articles[1][0])
     for i in range(len(articles)):
         article_ids.append(articles[i][0])
-    print(article_ids)
-    print(type(article_ids))
-    import random
-    random_id = random.choice(list(article_ids))
-    int_random_id = int(random_id)
+    if article_ids == []:
+    	return render_template("home.html")
+    else:
+        import random
+        random_id = random.choice(list(article_ids))
+        int_random_id = int(random_id)
 
-    result = cur.execute("SELECT * FROM articles WHERE id = %s", [int_random_id])
+        result = cur.execute("SELECT * FROM articles WHERE id = %s", [int_random_id])
 
-    article = cur.fetchone()
+        article = cur.fetchone()
 
-    return render_template('random.html', article=article)
+        return render_template('random.html', article=article)
+        # Close connection
+        cur.close()
+        conn.close()
 
 # Articles
 @app.route('/articles')
 def articles():
     # Create cursor
-    conn = psycopg2.connect(dbname="myflaskapp", user="postgres", password="qwert111")
+    conn = psycopg2.connect(dbname="dreamsaver", user="postgres", password="qwert111")
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)  # DictCursor is 'a must'!
 
     # Get articles
@@ -74,7 +77,7 @@ def articles():
 @app.route('/article/<string:id>/')
 def article(id):
     # Create cursor
-    conn = psycopg2.connect(dbname="myflaskapp", user="postgres", password="qwert111")
+    conn = psycopg2.connect(dbname="dreamsaver", user="postgres", password="qwert111")
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)  # DictCursor is 'a must'!
 
     # Get articles
@@ -83,6 +86,9 @@ def article(id):
     article = cur.fetchone()
 
     return render_template('article.html', article=article)
+
+    cur.close()
+    conn.close()
     
 
 
@@ -110,7 +116,7 @@ def register():
         password = sha256_crypt.encrypt(str(form.password.data))
 
         # Config and initiate Postgres (MAYBE it (conn) can be placed on top as a global variable)
-        conn = psycopg2.connect(dbname="myflaskapp", user="postgres", password="qwert111")
+        conn = psycopg2.connect(dbname="dreamsaver", user="postgres", password="qwert111")
         # Create cursor
         cur = conn.cursor()
 
@@ -140,7 +146,7 @@ def login():
 
         # Create cursor
           
-        conn = psycopg2.connect(dbname="myflaskapp", user="postgres", password="qwert111")
+        conn = psycopg2.connect(dbname="dreamsaver", user="postgres", password="qwert111")
         cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor) #
 
         # Get user by username
@@ -164,7 +170,7 @@ def login():
                 return redirect(url_for('dashboard'))
             else:
                 #app.logger.info('PASSWORD NOT MATCHED')
-                error = 'Invalid login'
+                error = 'Invalid password'
                 return render_template('login.html', error=error)
             # Close connection
             cur.close()
@@ -205,7 +211,7 @@ def logout():
 @is_logged_in
 def dashboard():
     # Create cursor
-    conn = psycopg2.connect(dbname="myflaskapp", user="postgres", password="qwert111")
+    conn = psycopg2.connect(dbname="dreamsaver", user="postgres", password="qwert111")
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)  # DictCursor is 'a must'!
 
     # Get articles
@@ -242,7 +248,7 @@ def add_article():
         body = form.body.data
 
         # Create Cursor
-        conn = psycopg2.connect(dbname="myflaskapp", user="postgres", password="qwert111")
+        conn = psycopg2.connect(dbname="dreamsaver", user="postgres", password="qwert111")
         cur = conn.cursor() 
 
         # Execute
@@ -267,7 +273,7 @@ def add_article():
 @is_logged_in
 def edit_article(id):
     # Create Cursor
-    conn = psycopg2.connect(dbname="myflaskapp", user="postgres", password="qwert111")
+    conn = psycopg2.connect(dbname="dreamsaver", user="postgres", password="qwert111")
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor) 
 
     # Get article by id
@@ -286,7 +292,7 @@ def edit_article(id):
         body = request.form['body']
     
         # Create Cursor
-        conn = psycopg2.connect(dbname="myflaskapp", user="postgres", password="qwert111")
+        conn = psycopg2.connect(dbname="dreamsaver", user="postgres", password="qwert111")
         cur = conn.cursor() 
         
         # Execute
@@ -311,7 +317,7 @@ def edit_article(id):
 @is_logged_in
 def delete_article(id):
     # Create Cursor
-    conn = psycopg2.connect(dbname="myflaskapp", user="postgres", password="qwert111")
+    conn = psycopg2.connect(dbname="dreamsaver", user="postgres", password="qwert111")
     cur = conn.cursor() 
         
     #Execute

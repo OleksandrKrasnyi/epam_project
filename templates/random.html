@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<div class="jumbotron text-center">
+		<h1>Random Article</h1>
+		<p class="lead">THIS IS RANDOM !!!</p>
+		
+	</div>
+	
+	<h1>{{ article.title }}</h1>
+	<small>Written by {{ article.author }} on {{ article.create_date }}</small>
+	<hr>
+	<div>
+		{{ article.body | safe }}
+	</div>
+	
+{% endblock %}

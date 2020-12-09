@@ -8,6 +8,7 @@ from functools import wraps  # for decoration purposes (@is_logged_in)
 
 # Initiate application
 app = Flask(__name__)
+app.secret_key='sfdsfdsfkjlsdfkjldasfkjldasfkjldasfkjladsdasfdfdasfdasfkjldasdskjlfafdasfdaffjhgadsdsdsffdfadfd'
 
 
 # Index

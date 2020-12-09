@@ -11,14 +11,14 @@ Feel free to register, login and write anything you want (but don't delete artic
 
 ## Installation
 
-To use this template, your computer needs:
+Software prerequisites:
 
 - [Python](https://python.org)
 - [Pip Package Manager](https://pypi.python.org/pypi)
 
 ### Running the app
 
-To run the application in it's folder
+To run the application, in it's folder
 - install venv
 - activate venv
 - install all [requirements](requirements.txt) from requirements.txt

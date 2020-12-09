@@ -7,7 +7,7 @@ This is DreamSaver v.0.0.3
  
 Application which you can use to store your Dreams or Thoughts.  
 Also know that you can inspire other people so don't hesitate and share everything best you have in your imagination!  
-Feel free to register, login and write anything you want (but don't delete articles of other people please)
+Feel free to register, login and write anything you want (but don't delete articles belong to other people, please).
 
 ## Installation
 

@@ -21,7 +21,7 @@ To use this template, your computer needs:
 To run the application in it's folder
 - install venv
 - activate venv
-- install all [requirements](requirements.txt)
+- install all [requirements](requirements.txt) from requirements.txt
 - in a console type:
 ```bash
 python app.py

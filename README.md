@@ -1,5 +1,6 @@
-(!!!DEPLOYED!!!)[https://dreamsaver.herokuapp.com/]  
-This is DreamSaver v.0.0.3
+[!!!DEPLOYED!!!](https://dreamsaver.herokuapp.com/)  
+This is DreamSaver v.0.0.3  
+![alt text][logo]
 [logo]:  https://simpleicon.com/wp-content/uploads/drill.png
   
 Application which you can use to store your Dreams or Thoughts.  

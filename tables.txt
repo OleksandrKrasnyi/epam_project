@@ -1,6 +1,6 @@
 CREATE TABLE users(
                 
-                    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+                    id SERIAL PRIMARY KEY,
                     name VARCHAR(100),
                     email VARCHAR(100),
                     username VARCHAR(30),
@@ -11,7 +11,7 @@ CREATE TABLE users(
 
 CREATE TABLE articles(
 
-                    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+                    id SERIAL PRIMARY KEY,
                     title VARCHAR(255),
                     author VARCHAR(100),
                     body TEXT,

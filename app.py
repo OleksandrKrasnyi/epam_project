@@ -26,7 +26,7 @@ def about():
 @app.route('/articles')
 def articles():
     # Create cursor
-    conn = psycopg2.connect(dbname="dreamsaver", user="postgres", password="qwert111")
+    conn = psycopg2.connect(dbname="dahfislpfl58c2", user="tnyjbxitavzbld", password="cf1cc3c90602b68d9f8f2ec33b35bf4b2439975eec5771c2700f097c0bb5902a")
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)  # DictCursor is 'a must'!
 
     # Get articles
@@ -48,7 +48,7 @@ def articles():
 @app.route('/article/<string:id>/')
 def article(id):
     # Create cursor
-    conn = psycopg2.connect(dbname="dreamsaver", user="postgres", password="qwert111")
+    conn = psycopg2.connect(dbname="dahfislpfl58c2", user="tnyjbxitavzbld", password="cf1cc3c90602b68d9f8f2ec33b35bf4b2439975eec5771c2700f097c0bb5902a")
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)  # DictCursor is 'a must'!
 
     # Get articles
@@ -66,7 +66,7 @@ def article(id):
 @app.route('/random')
 def random():
     # Create cursor
-    conn = psycopg2.connect(dbname="dreamsaver", user="postgres", password="qwert111")
+    conn = psycopg2.connect(dbname="dahfislpfl58c2", user="tnyjbxitavzbld", password="cf1cc3c90602b68d9f8f2ec33b35bf4b2439975eec5771c2700f097c0bb5902a")
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)  # DictCursor is 'a must'!
 
     # Get articles
@@ -120,7 +120,7 @@ def register():
         password = sha256_crypt.encrypt(str(form.password.data))
 
         # Config and initiate Postgres (MAYBE it (conn) can be placed on top as a global variable)
-        conn = psycopg2.connect(dbname="dreamsaver", user="postgres", password="qwert111")
+        conn = psycopg2.connect(dbname="dahfislpfl58c2", user="tnyjbxitavzbld", password="cf1cc3c90602b68d9f8f2ec33b35bf4b2439975eec5771c2700f097c0bb5902a")
         # Create cursor
         cur = conn.cursor()
 
@@ -150,7 +150,7 @@ def login():
 
         # Create cursor
           
-        conn = psycopg2.connect(dbname="dreamsaver", user="postgres", password="qwert111")
+        conn = psycopg2.connect(dbname="dahfislpfl58c2", user="tnyjbxitavzbld", password="cf1cc3c90602b68d9f8f2ec33b35bf4b2439975eec5771c2700f097c0bb5902a")
         cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor) #
 
         # Get user by username
@@ -215,7 +215,7 @@ def logout():
 @is_logged_in
 def dashboard():
     # Create cursor
-    conn = psycopg2.connect(dbname="dreamsaver", user="postgres", password="qwert111")
+    conn = psycopg2.connect(dbname="dahfislpfl58c2", user="tnyjbxitavzbld", password="cf1cc3c90602b68d9f8f2ec33b35bf4b2439975eec5771c2700f097c0bb5902a")
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)  # DictCursor is 'a must'!
 
     # Get articles
@@ -252,7 +252,7 @@ def add_article():
         body = form.body.data
 
         # Create Cursor
-        conn = psycopg2.connect(dbname="dreamsaver", user="postgres", password="qwert111")
+        conn = psycopg2.connect(dbname="dahfislpfl58c2", user="tnyjbxitavzbld", password="cf1cc3c90602b68d9f8f2ec33b35bf4b2439975eec5771c2700f097c0bb5902a")
         cur = conn.cursor() 
 
         # Execute
@@ -277,7 +277,7 @@ def add_article():
 @is_logged_in
 def edit_article(id):
     # Create Cursor
-    conn = psycopg2.connect(dbname="dreamsaver", user="postgres", password="qwert111")
+    conn = psycopg2.connect(dbname="dahfislpfl58c2", user="tnyjbxitavzbld", password="cf1cc3c90602b68d9f8f2ec33b35bf4b2439975eec5771c2700f097c0bb5902a")
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor) 
 
     # Get article by id
@@ -296,7 +296,7 @@ def edit_article(id):
         body = request.form['body']
     
         # Create Cursor
-        conn = psycopg2.connect(dbname="dreamsaver", user="postgres", password="qwert111")
+        conn = psycopg2.connect(dbname="dahfislpfl58c2", user="tnyjbxitavzbld", password="cf1cc3c90602b68d9f8f2ec33b35bf4b2439975eec5771c2700f097c0bb5902a")
         cur = conn.cursor() 
         
         # Execute
@@ -321,7 +321,7 @@ def edit_article(id):
 @is_logged_in
 def delete_article(id):
     # Create Cursor
-    conn = psycopg2.connect(dbname="dreamsaver", user="postgres", password="qwert111")
+    conn = psycopg2.connect(dbname="dahfislpfl58c2", user="tnyjbxitavzbld", password="cf1cc3c90602b68d9f8f2ec33b35bf4b2439975eec5771c2700f097c0bb5902a")
     cur = conn.cursor() 
         
     #Execute

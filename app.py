@@ -1,12 +1,13 @@
-import psycopg2
-import psycopg2.extras
-from flask import Flask, render_template, flash, redirect, url_for, session, logging, request
-from wtforms import Form, StringField, TextAreaField, PasswordField, validators  # WTF-from for registration
-from passlib.hash import sha256_crypt
+import psycopg2  # DB connector (postgres)
+import psycopg2.extras  # DB connector extras
+from flask import Flask, render_template, flash, redirect, url_for, session, logging, request  # Framework for this Web-Application
+from wtforms import Form, StringField, TextAreaField, PasswordField, validators  # WTF-form for registration
+from passlib.hash import sha256_crypt  # password encrypter (even in DB it will be encrypted)
 from functools import wraps  # for decoration purposes (@is_logged_in)
 
-app = Flask(__name__)
 
+# Initiate application
+app = Flask(__name__)
 
 
 # Index
@@ -19,37 +20,7 @@ def index():
 def about():
     return render_template('about.html')
 
-# Articles
-@app.route('/random')
-def random():
-    # Create cursor
-    conn = psycopg2.connect(dbname="dreamsaver", user="postgres", password="qwert111")
-    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)  # DictCursor is 'a must'!
 
-    # Get articles
-    result = cur.execute("SELECT * FROM articles")
-
-    articles = cur.fetchall()
-    article_ids = []
-    #print(len(articles))
-    #print(articles[1][0])
-    for i in range(len(articles)):
-        article_ids.append(articles[i][0])
-    if article_ids == []:
-    	return render_template("home.html")
-    else:
-        import random
-        random_id = random.choice(list(article_ids))
-        int_random_id = int(random_id)
-
-        result = cur.execute("SELECT * FROM articles WHERE id = %s", [int_random_id])
-
-        article = cur.fetchone()
-
-        return render_template('random.html', article=article)
-        # Close connection
-        cur.close()
-        conn.close()
 
 # Articles
 @app.route('/articles')
@@ -89,6 +60,39 @@ def article(id):
 
     cur.close()
     conn.close()
+
+
+# Random article
+@app.route('/random')
+def random():
+    # Create cursor
+    conn = psycopg2.connect(dbname="dreamsaver", user="postgres", password="qwert111")
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)  # DictCursor is 'a must'!
+
+    # Get articles
+    result = cur.execute("SELECT * FROM articles")
+
+    articles = cur.fetchall()
+    article_ids = []
+    #print(len(articles))
+    #print(articles[1][0])
+    for i in range(len(articles)):
+        article_ids.append(articles[i][0])
+    if article_ids == []:
+        return render_template("home.html")
+    else:
+        import random
+        random_id = random.choice(list(article_ids))
+        int_random_id = int(random_id)
+
+        result = cur.execute("SELECT * FROM articles WHERE id = %s", [int_random_id])
+
+        article = cur.fetchone()
+
+        return render_template('random.html', article=article)
+        # Close connection
+        cur.close()
+        conn.close()
     
 
 
